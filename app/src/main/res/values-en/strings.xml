@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">coursera</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="btn">Enter</string>
+</resources>
