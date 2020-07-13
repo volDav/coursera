@@ -39,6 +39,40 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.3.0-alpha01'
 
+    //administrar la base de datos con Chrome//:inspect
+    //descomentar el codigo en App
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
+
+    /*Gson*/
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    //androidx-rxjava
+    implementation "androidx.room:room-runtime:2.2.3"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    kapt "androidx.room:room-compiler:2.2.3"
+    implementation "androidx.room:room-ktx:2.2.3"
+    implementation "androidx.room:room-guava:2.2.3"
+    testImplementation "androidx.room:room-testing:2.2.3"
+
+    //Persistence Room
+    implementation "android.arch.persistence.room:runtime:2.2.0-beta01"
+    kapt "android.arch.persistence.room:compiler:2.2.0-beta01"
+    implementation "android.arch.persistence.room:guava:2.2.0-beta01"
+    testImplementation "android.arch.persistence.room:testing:2.2.0-beta01"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.1.0"
+
+
+    //funciones ktx como doAsynk, toast,longToast... entre otras
+    implementation 'org.jetbrains.anko:anko-common:0.9'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
