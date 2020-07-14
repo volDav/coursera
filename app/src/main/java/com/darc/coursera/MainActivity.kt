@@ -1,95 +1,51 @@
 package com.darc.coursera
 
-import android.app.Application
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.Toolbar
+import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import com.darc.coursera.adapter.PetAdapter
-import com.darc.coursera.database.entities.Pet
-import com.darc.coursera.database.repository.PetRepository
+import com.darc.coursera.adapter.VPAdapter
+import com.darc.coursera.base.BaseActivity
 import com.darc.coursera.databinding.ActivityMainBinding
-import com.darc.coursera.ktx.bindLazy
 import kotlinx.android.synthetic.main.body_home_sesion.*
 
-class MainActivity : AppCompatActivity(),MainActivityVM.Listener {
-
-
-    private val toolbar: Toolbar by bindLazy(R.id.toolbar)
+class MainActivity : BaseActivity() {
 
     lateinit var binding : ActivityMainBinding
-
-    lateinit var viewModel  : MainActivityVM
-
-    lateinit var adapter : PetAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityVM::class.java)
-        viewModel.listener = this
+        supportActionBar?.elevation = 2f
 
-        binding.viewModel = viewModel
+        Handler().postDelayed({
+            loadFragments()
+        },100)
+    }
 
-        adapter = PetAdapter(arrayListOf())
+    private fun loadFragments() {
+        val vpAdapter = VPAdapter(this)
+        binding.viewPagerConsumo.offscreenPageLimit = vpAdapter.count
+        binding.viewPagerConsumo.adapter = vpAdapter
+        binding.tabLayoutConsumo.setupWithViewPager(binding.viewPagerConsumo)
+    }
 
-        adapter.like = {
-            viewModel.update(it.apply { likes += 1 })
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.menu_tools,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.item1 -> {}
+            R.id.item2 -> AcercaDe.starActivity(this)
+            R.id.item3 -> TopFivePets.startActivity(this)
         }
-
-        binding.rvPets.adapter = adapter
-
-        viewModel.getPets().observe(this, Observer {
-            adapter.changeList(ArrayList(it))
-        })
-    }
-
-    override fun clckTopFive() {
-        TopFivePets.startActivity(this)
-    }
-/*
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
-        setHomeIndicator(R.drawable.ic_back_arrow)
-    }
-
-    private fun setHomeIndicator(@DrawableRes p0: Int) {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val vectorDrawableCompat = VectorDrawableCompat.create(resources, p0, null)
-        vectorDrawableCompat?.setTint(Color.WHITE)
-        supportActionBar?.setHomeAsUpIndicator(vectorDrawableCompat)
-    }
-*/
-
-}
-
-class MainActivityVM(application: Application) : AndroidViewModel(application){
-
-    private var coordRepository : PetRepository = PetRepository(application)
-
-    var listener : Listener? = null
-
-    fun getPets() : LiveData<List<Pet>> {
-        return coordRepository.getPets()
-    }
-
-    fun update(pet : Pet)  {
-        coordRepository.update(pet)
-    }
-
-    interface Listener {
-        fun clckTopFive()
+        return super.onOptionsItemSelected(item)
     }
 
 }
+

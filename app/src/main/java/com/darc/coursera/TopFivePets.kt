@@ -3,6 +3,7 @@ package com.darc.coursera
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -11,12 +12,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.darc.coursera.adapter.PetAdapter
+import com.darc.coursera.base.BaseActivity
+import com.darc.coursera.base.BaseActivityInterna
 import com.darc.coursera.database.entities.Pet
 import com.darc.coursera.database.repository.PetRepository
 import com.darc.coursera.databinding.ActivityTopFivePetsBinding
 
-class TopFivePets : AppCompatActivity(),TopFivePetsVM.Listener {
+class TopFivePets : BaseActivityInterna() {
 
     companion object {
         fun startActivity(context: Context){
@@ -33,10 +37,9 @@ class TopFivePets : AppCompatActivity(),TopFivePetsVM.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         binding = DataBindingUtil.setContentView(this,R.layout.activity_top_five_pets)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_top_five_pets)
 
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(TopFivePetsVM::class.java)
-        viewModel.listener = this
 
         binding.viewModel = viewModel
 
@@ -52,19 +55,17 @@ class TopFivePets : AppCompatActivity(),TopFivePetsVM.Listener {
             adapter.changeList(ArrayList(it))
         })
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val vectorDrawableCompat = VectorDrawableCompat.create(resources,R.drawable.ic_back_arrow, null)
+        vectorDrawableCompat?.setTint(Color.WHITE)
+        supportActionBar?.setHomeAsUpIndicator(vectorDrawableCompat)
 
-    }
-
-    override fun clckBack() {
-        finish()
     }
 }
 
 class TopFivePetsVM(application: Application) : AndroidViewModel(application){
 
     private var coordRepository : PetRepository = PetRepository(application)
-
-    var listener : Listener? = null
 
     fun getPetsTopFive() : LiveData<List<Pet>> {
         return coordRepository.getPetsTopFive()
@@ -74,7 +75,4 @@ class TopFivePetsVM(application: Application) : AndroidViewModel(application){
         coordRepository.update(pet)
     }
 
-    interface Listener {
-        fun clckBack()
-    }
 }

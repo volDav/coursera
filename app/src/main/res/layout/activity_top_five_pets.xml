@@ -16,61 +16,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:onClick="@{() -> viewModel.listener.clckBack()}"
-                        android:src="@drawable/ic_back_arrow"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_huella"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textSize="28sp"
-                        android:layout_marginEnd="35dp"
-                        android:textColor="#000"
-                        android:gravity="center_horizontal"
-                        android:text="Petagram"/>
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/ic_round_more"/>
-
-
-                </LinearLayout>
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPets"
