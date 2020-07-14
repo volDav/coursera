@@ -19,4 +19,7 @@ interface PetDao {
     @Query("SELECT * FROM pet")
     fun getPets() : LiveData<List<Pet>>
 
+    @Query("SELECT * FROM pet ORDER BY likes DESC LIMIT 5")
+    fun getPetsTopFive() : LiveData<List<Pet>>
+
 }

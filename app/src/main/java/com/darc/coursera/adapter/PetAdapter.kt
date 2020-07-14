@@ -26,15 +26,15 @@ class PetAdapter(private var lst : ArrayList<Pet>) : RecyclerView.Adapter<PetAda
         holder.binding.pet = lst[position]
 
         holder.binding.img.setImageResource(
-        when(position){
-            0 -> R.drawable.img1
-            1 -> R.drawable.img2
-            2 -> R.drawable.img3
-            3 -> R.drawable.img4
-            4 -> R.drawable.img5
-            5 -> R.drawable.img6
-            6 -> R.drawable.img7
-            7 -> R.drawable.img8
+        when(lst[position].id.toInt()){
+            1 -> R.drawable.img1
+            2 -> R.drawable.img2
+            3 -> R.drawable.img3
+            4 -> R.drawable.img4
+            5 -> R.drawable.img5
+            6 -> R.drawable.img6
+            7 -> R.drawable.img7
+            8 -> R.drawable.img8
             else -> 0
         })
 

@@ -23,6 +23,7 @@ class PetRepository(application: Application)  {
         }
     }
 
+
     fun delete(pet: Pet){
         doAsync {
             languageDao.delete(pet)
@@ -30,4 +31,6 @@ class PetRepository(application: Application)  {
     }
 
     fun getPets() = languageDao.getPets()
+
+    fun getPetsTopFive() = languageDao.getPetsTopFive()
 }

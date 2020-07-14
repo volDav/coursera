@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.darc.coursera.MainActivityVM" />
+            type="com.darc.coursera.TopFivePetsVM" />
 
     </data>
 
@@ -37,6 +37,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
+                        android:onClick="@{() -> viewModel.listener.clckBack()}"
+                        android:src="@drawable/ic_back_arrow"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
                         android:src="@drawable/ic_huella"/>
 
                     <TextView
@@ -44,41 +51,10 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:textSize="28sp"
-                        android:layout_marginStart="35dp"
+                        android:layout_marginEnd="35dp"
                         android:textColor="#000"
                         android:gravity="center_horizontal"
                         android:text="Petagram"/>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?android:selectableItemBackground"
-                        android:onClick="@{() -> viewModel.listener.clckTopFive()}"
-                        android:layout_marginEnd="10dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:src="@drawable/ic_star"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="5"
-                            android:textSize="18sp"
-                            android:textColor="#fff"
-                            android:layout_marginEnd="2dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     <ImageView
