@@ -6,14 +6,7 @@ import com.darc.coursera.MainActivity
 import com.darc.coursera.fragments.DetailFragment
 import com.darc.coursera.fragments.ListFragment
 
-class VPAdapter(val activity: MainActivity) : FragmentPagerAdapter(activity.supportFragmentManager) {
-
-    private val titulos = ArrayList<String>(2)
-
-    init {
-        titulos.add("Lista")
-        titulos.add("Detalle")
-    }
+class VPAdapter(activity: MainActivity) : FragmentPagerAdapter(activity.supportFragmentManager) {
 
     override fun getItem(position: Int): Fragment {
 
@@ -24,11 +17,6 @@ class VPAdapter(val activity: MainActivity) : FragmentPagerAdapter(activity.supp
         }
     }
 
-    override fun getCount(): Int {
-        return titulos.size
-    }
+    override fun getCount(): Int = 2
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titulos[position]
-    }
 }

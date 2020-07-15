@@ -27,12 +27,17 @@ class MainActivity : BaseActivity() {
 
     private fun loadFragments() {
         val vpAdapter = VPAdapter(this)
+
         binding.viewPagerConsumo.offscreenPageLimit = vpAdapter.count
         binding.viewPagerConsumo.adapter = vpAdapter
         binding.tabLayoutConsumo.setupWithViewPager(binding.viewPagerConsumo)
+
+        binding.tabLayoutConsumo.getTabAt(0)?.setIcon(R.drawable.ic_house)
+        binding.tabLayoutConsumo.getTabAt(1)?.setIcon(R.drawable.ic_baseline_pets)
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.menu_tools,menu)
         return true
@@ -40,7 +45,7 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.item1 -> {}
+            R.id.item1 -> Contacto.startActivity(this)
             R.id.item2 -> AcercaDe.starActivity(this)
             R.id.item3 -> TopFivePets.startActivity(this)
         }
